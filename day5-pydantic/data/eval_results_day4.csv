@@ -1,0 +1,51 @@
+review_id,expected_label,predicted_label,confidence,flagged_for_human,latency_seconds,error
+E0000,fake,fake,0.85,False,26.37,
+E0001,genuine,suspicious,0.72,True,29.49,
+E0002,genuine,suspicious,0.72,True,30.66,
+E0003,genuine,fake,0.88,False,27.06,
+E0004,fake,fake,0.92,False,29.59,
+E0005,genuine,suspicious,0.55,True,30.81,
+E0006,genuine,genuine,0.85,False,29.43,
+E0007,genuine,genuine,0.72,False,23.92,
+E0008,genuine,fake,0.82,False,26.37,
+E0009,fake,fake,0.85,False,34.09,
+E0010,fake,fake,0.88,False,31.25,
+E0011,fake,genuine,0.72,False,28.24,
+E0012,genuine,genuine,0.82,False,27.47,
+E0013,fake,fake,0.82,False,26.96,
+E0014,fake,fake,0.92,False,27.92,
+E0015,fake,genuine,0.72,False,25.55,
+E0016,genuine,suspicious,0.55,True,27.09,
+E0017,genuine,genuine,0.78,False,24.43,
+E0018,genuine,genuine,0.72,False,27.99,
+E0019,fake,fake,0.92,False,28.47,
+E0020,fake,suspicious,0.72,True,26.21,
+E0021,fake,fake,0.85,False,27.03,
+E0022,fake,fake,0.92,False,36.15,
+E0023,genuine,genuine,0.72,False,27.13,
+E0024,genuine,genuine,0.82,False,28.3,
+E0025,fake,fake,0.85,False,26.52,
+E0026,genuine,genuine,0.82,False,29.88,
+E0027,genuine,fake,0.88,False,26.27,
+E0028,genuine,suspicious,0.72,True,27.28,
+E0029,fake,fake,0.92,False,26.09,
+E0030,genuine,fake,0.85,False,26.2,
+E0031,fake,fake,0.85,False,28.38,
+E0032,genuine,fake,0.92,False,26.94,
+E0033,fake,fake,0.92,False,31.76,
+E0034,fake,fake,0.88,False,343.38,
+E0035,fake,suspicious,0.55,True,29.23,
+E0036,genuine,genuine,0.82,False,32.69,
+E0037,genuine,genuine,0.72,False,26.83,
+E0038,fake,suspicious,0.65,True,26.93,
+E0039,genuine,genuine,0.78,False,28.11,
+E0040,fake,fake,0.82,False,29.15,
+E0041,fake,error,0.0,False,0.59,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0042,fake,error,0.0,False,0.2,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0043,genuine,error,0.0,False,0.2,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0044,fake,error,0.0,False,0.2,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0045,fake,error,0.0,False,0.8,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0046,genuine,error,0.0,False,0.2,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0047,fake,error,0.0,False,0.65,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0048,genuine,error,0.0,False,0.18,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
+E0049,genuine,error,0.0,False,0.18,"Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purcha"
