@@ -62,9 +62,11 @@ const STOP_WORDS = new Set([
   "itself",
   "job",
   "just",
+  "looking",
   "me",
   "more",
   "most",
+  "need",
   "my",
   "myself",
   "no",
@@ -80,11 +82,15 @@ const STOP_WORDS = new Set([
   "other",
   "our",
   "ours",
+  "responsibilities",
   "ourselves",
   "out",
   "over",
   "own",
   "per",
+  "include",
+  "includes",
+  "ideal",
   "role",
   "same",
   "she",
@@ -187,7 +193,7 @@ const TECH_HINTS = new Set([
 function normalizeText(text) {
   return String(text || "")
     .toLowerCase()
-    .replace(/[^\w+#./-]+/g, " ")
+    .replace(/[^\w+#/-]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -226,7 +232,17 @@ function hasPhrase(text, phrase) {
   if (!normalizedPhrase) {
     return false;
   }
-  return normalizedText.includes(` ${normalizedPhrase} `);
+  if (normalizedText.includes(` ${normalizedPhrase} `)) {
+    return true;
+  }
+
+  const phraseWords = normalizedPhrase.split(" ");
+  if (phraseWords.length === 1) {
+    return false;
+  }
+
+  const textWords = new Set(tokenize(text));
+  return phraseWords.every((word) => textWords.has(word));
 }
 
 function phraseSpecificity(phrase) {
@@ -238,30 +254,43 @@ function phraseSpecificity(phrase) {
 }
 
 export function extractKeywords(text, limit = 20) {
-  const tokens = tokenize(text);
   const counts = new Map();
+  const segments = String(text || "")
+    .split(/[\n\r,.;:()]+/)
+    .map((segment) => tokenize(segment))
+    .filter((segmentTokens) => segmentTokens.length);
 
-  for (let size = 1; size <= 3; size += 1) {
-    for (let index = 0; index <= tokens.length - size; index += 1) {
-      const phraseTokens = tokens.slice(index, index + size);
-      if (phraseTokens.some((token) => token.length < 3 && !["ai", "ui", "ux"].includes(token))) {
-        continue;
+  for (const tokens of segments) {
+    for (let size = 1; size <= 2; size += 1) {
+      for (let index = 0; index <= tokens.length - size; index += 1) {
+        const phraseTokens = tokens.slice(index, index + size);
+        if (phraseTokens.some((token) => token.length < 3 && !["ai", "ui", "ux"].includes(token))) {
+          continue;
+        }
+
+        const phrase = phraseTokens.join(" ");
+        counts.set(phrase, (counts.get(phrase) || 0) + 1);
       }
-
-      const phrase = phraseTokens.join(" ");
-      counts.set(phrase, (counts.get(phrase) || 0) + 1);
     }
   }
 
   const candidates = [...counts.entries()]
-    .filter(([phrase, count]) => phrase.split(" ").length > 1 || count > 1 || TECH_HINTS.has(phrase))
+    .filter(([phrase, count]) => {
+      const words = phrase.split(" ");
+      return words.length > 1 || count > 1 || TECH_HINTS.has(phrase) || phrase.length >= 7;
+    })
     .map(([phrase, count]) => ({
       phrase,
       label: titleCase(phrase),
       count,
       score: count * 2 + phraseSpecificity(phrase)
     }))
-    .sort((a, b) => b.score - a.score || b.phrase.length - a.phrase.length);
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.phrase.split(" ").length - a.phrase.split(" ").length ||
+        b.phrase.length - a.phrase.length
+    );
 
   const selected = [];
   for (const candidate of candidates) {
