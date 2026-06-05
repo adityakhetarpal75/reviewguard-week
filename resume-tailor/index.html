@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resume Tailor</title>
+    <meta
+      name="description"
+      content="Tailor a resume to a job description with local keyword analysis and deterministic draft generation."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="./index.html">Resume Tailor</a>
+        <a href="#workspace">Start tailoring</a>
+      </nav>
+
+      <section class="hero__content">
+        <p class="eyebrow">Private, browser-only resume tailoring</p>
+        <h1>Turn one base resume into a role-specific application package.</h1>
+        <p class="hero__lead">
+          Paste a resume and job description to get a match score, keyword gaps, prioritized bullets,
+          a tailored summary, and a cover letter draft.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#workspace">Tailor my resume</a>
+          <button class="button button--ghost" type="button" data-load-sample>Load sample</button>
+        </div>
+      </section>
+    </header>
+
+    <main id="workspace" class="workspace">
+      <form class="panel input-panel" data-tailor-form>
+        <div class="panel__heading">
+          <div>
+            <p class="eyebrow">Inputs</p>
+            <h2>Resume and job description</h2>
+          </div>
+          <button class="button button--subtle" type="button" data-clear>Clear</button>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            <span>Target role</span>
+            <input id="target-role" name="target-role" autocomplete="organization-title" placeholder="Senior Product Manager" />
+          </label>
+          <label>
+            <span>Company</span>
+            <input id="company-name" name="company-name" autocomplete="organization" placeholder="Acme Software" />
+          </label>
+        </div>
+
+        <label class="textarea-field">
+          <span>Base resume</span>
+          <textarea
+            id="resume"
+            name="resume"
+            rows="18"
+            placeholder="Paste your current resume here..."
+            spellcheck="true"
+          ></textarea>
+        </label>
+
+        <label class="textarea-field">
+          <span>Job description</span>
+          <textarea
+            id="job"
+            name="job"
+            rows="18"
+            placeholder="Paste the full job description here..."
+            spellcheck="true"
+          ></textarea>
+        </label>
+
+        <button class="button button--primary button--wide" type="submit">Generate tailored package</button>
+      </form>
+
+      <section class="results">
+        <article class="panel score-card" aria-live="polite">
+          <div class="score-ring" data-score-ring>
+            <span data-score-value>0%</span>
+          </div>
+          <div>
+            <p class="eyebrow">Keyword coverage</p>
+            <h2>Match score</h2>
+            <p data-status>Add both documents to generate a tailored resume package.</p>
+          </div>
+        </article>
+
+        <div class="keyword-grid">
+          <article class="panel">
+            <p class="eyebrow">Use these prominently</p>
+            <h2>Covered keywords</h2>
+            <ul class="keyword-list keyword-list--covered" data-covered-list></ul>
+          </article>
+
+          <article class="panel">
+            <p class="eyebrow">Add only if accurate</p>
+            <h2>Missing keywords</h2>
+            <ul class="keyword-list keyword-list--missing" data-missing-list></ul>
+          </article>
+        </div>
+
+        <article class="panel output-panel">
+          <div class="panel__heading">
+            <div>
+              <p class="eyebrow">Generated draft</p>
+              <h2>Tailored resume package</h2>
+            </div>
+            <div class="output-actions">
+              <button class="button button--subtle" type="button" data-copy-output disabled>Copy</button>
+              <button class="button button--subtle" type="button" data-download-output disabled>Download .txt</button>
+            </div>
+          </div>
+          <textarea
+            id="tailored-output"
+            rows="22"
+            readonly
+            placeholder="Your tailored package will appear here..."
+          ></textarea>
+        </article>
+      </section>
+    </main>
+
+    <section class="notes" aria-label="How it works">
+      <article>
+        <h2>How it works</h2>
+        <p>
+          The app extracts high-signal terms from the job description, checks which terms already appear in your
+          resume, and reorders your existing bullets by relevance. Suggested additions are clearly marked so you can
+          keep the final resume accurate.
+        </p>
+      </article>
+      <article>
+        <h2>Privacy</h2>
+        <p>
+          Resume content stays in your browser session. There are no API calls, accounts, uploads, cookies, or local
+          storage writes.
+        </p>
+      </article>
+    </section>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
